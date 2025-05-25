@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import type { FormEvent } from 'react';
-import type { EmailJSResponseStatus } from '@emailjs/browser';
+import type { ChangeEvent } from 'react';
 import emailjs from '@emailjs/browser';
 
 export const ContactMe = () => {
@@ -13,22 +12,34 @@ export const ContactMe = () => {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
         });
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
         setError("");
+
         try {
-            // Add your emailjs logic here
+            await emailjs.send(
+                'service_xxxxxxx', // Replace with your EmailJS service ID
+                'template_xxxxxxx', // Replace with your EmailJS template ID
+                {
+                    from_name: formData.name,
+                    from_email: formData.email,
+                    message: formData.message,
+                },
+                'your_public_key' // Replace with your EmailJS public key
+            );
             setSuccess(true);
+            setFormData({ name: "", email: "", message: "" });
         } catch (err) {
             setError("Failed to send message. Please try again.");
+            console.error('EmailJS error:', err);
         }
         setLoading(false);
     };
