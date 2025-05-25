@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import emailjs from "@emailjs/browser";
+import { useState } from 'react';
+import type { FormEvent } from 'react';
+import type { EmailJSResponseStatus } from '@emailjs/browser';
+import emailjs from '@emailjs/browser';
 
 export const ContactMe = () => {
     const [formData, setFormData] = useState({
