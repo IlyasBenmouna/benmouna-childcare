@@ -10,15 +10,15 @@ import { Footer } from "./components/Footer.tsx";
 
 const App: React.FC = () => {
     return (
-        <div className="min-h-screen bg-rgb(221 234 238) flex justify-center items-center p-4">
-            <div className="w-full max-w-8xl rounded-[50px] border-1 bg-white overflow-hidden shadow-lg gap-10">
+        <div className="min-h-screen bg-[#f0f5f7] flex justify-center items-center p-4 md:p-8">
+            <div className="w-full max-w-7xl bg-white rounded-[32px] overflow-hidden shadow-[0_8px_32px_-4px_rgba(0,0,0,0.1)] border border-[#e7f0f3]">
                 <Header />
                 <Hero />
+                <AboutMe />
                 <HeroSection />
-{/*
+                {/*
                 <Testimonials />
 */}
-                <AboutMe />
                 <NurseryGallery />
                 <ContactMe />
                 <Footer />

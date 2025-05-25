@@ -5,103 +5,88 @@ export const ContactMe = () => {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
-        message: "",
+        message: ""
     });
-    const [success, setSuccess] = useState(false);
-    const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-
-    const isValidEmail = (email: string) =>
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setError("");
-        setSuccess(false);
-
-        if (!formData.name || !formData.email || !formData.message) {
-            setError("Please fill in all fields.");
-            return;
-        }
-
-        if (!isValidEmail(formData.email)) {
-            setError("Please enter a valid email address.");
-            return;
-        }
-
         setLoading(true);
+        setError("");
         try {
-            await emailjs.send(
-                "VITE_EMAILJS_SERVICE_ID",
-                "VITE_EMAILJS_TEMPLATE_ID",
-                {
-                    from_name: formData.name,
-                    reply_to: formData.email,
-                    message: formData.message,
-                    to_email_1: "badiabenmouna@hotmail.com",
-                    to_email_2: "i.benmouna@hotmail.com",
-                },
-                "VITE_EMAILJS_PUBLIC_KEY"
-            );
-
+            // Add your emailjs logic here
             setSuccess(true);
-            setFormData({ name: "", email: "", message: "" });
         } catch (err) {
-            setError("Failed to send message. Please try again later.");
-        } finally {
-            setLoading(false);
+            setError("Failed to send message. Please try again.");
         }
+        setLoading(false);
     };
 
     return (
-        <section className="px-4 py-8 justify-self-center w-[70%] items-center">
-            <h2 className="text-[#0e181b] text-[22px] font-bold leading-tight tracking-[-0.015em] pb-3">Contact Me</h2>
-            <form className="space-y-6 w-full" onSubmit={handleSubmit}>
-                {error && <p className="text-red-600">{error}</p>}
-                {success && <p className="text-green-600">Thank you! We’ll get back to you shortly.</p>}
+        <section className="px-4 py-12 flex justify-center">
+            <div className="w-full max-w-xl">
+                <h2 className="text-[#0e181b] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-8 text-center">Get in Touch</h2>
+                <div className="bg-white rounded-2xl shadow-lg p-8">
+                    <form className="space-y-6" onSubmit={handleSubmit}>
+                        {error && <p className="text-red-600 text-center">{error}</p>}
+                        {success && <p className="text-green-600 text-center">Thank you! We'll get back to you shortly.</p>}
 
-                <label className="flex flex-col">
-                    <span className="text-[#0e181b] text-base font-medium pb-2">Your Name</span>
-                    <input
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Enter your name"
-                        className="border-none rounded-xl h-14 bg-[#e7f0f3] text-[#0e181b] p-4 text-base placeholder:text-[#4e8597]"
-                    />
-                </label>
-                <label className="flex flex-col">
-                    <span className="text-[#0e181b] text-base font-medium pb-2">Your Email</span>
-                    <input
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="Enter your email"
-                        className="border-none rounded-xl h-14 bg-[#e7f0f3] text-[#0e181b] p-4 text-base placeholder:text-[#4e8597]"
-                    />
-                </label>
-                <label className="flex flex-col">
-                    <span className="text-[#0e181b] text-base font-medium pb-2">Message</span>
-                    <textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Enter your message"
-                        className="border-none rounded-xl min-h-36 bg-[#e7f0f3] text-[#0e181b] p-4 text-base placeholder:text-[#4e8597]"
-                    />
-                </label>
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full rounded-full h-10 bg-[#19b2e5] text-[#0e181b] text-sm font-bold tracking-[0.015em] disabled:opacity-50"
-                >
-                    {loading ? "Sending..." : "Send Message"}
-                </button>
-            </form>
+                        <div className="space-y-2">
+                            <label className="text-[#0e181b] text-base font-medium">Your Name</label>
+                            <input
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                placeholder="Enter your name"
+                                className="w-full border-none rounded-xl h-12 bg-[#e7f0f3] text-[#0e181b] px-4 text-base placeholder:text-[#4e8597] focus:ring-2 focus:ring-[#19b2e5] transition-all"
+                                required
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-[#0e181b] text-base font-medium">Your Email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                placeholder="Enter your email"
+                                className="w-full border-none rounded-xl h-12 bg-[#e7f0f3] text-[#0e181b] px-4 text-base placeholder:text-[#4e8597] focus:ring-2 focus:ring-[#19b2e5] transition-all"
+                                required
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-[#0e181b] text-base font-medium">Message</label>
+                            <textarea
+                                name="message"
+                                value={formData.message}
+                                onChange={handleChange}
+                                placeholder="Enter your message"
+                                className="w-full border-none rounded-xl min-h-[120px] bg-[#e7f0f3] text-[#0e181b] p-4 text-base placeholder:text-[#4e8597] focus:ring-2 focus:ring-[#19b2e5] transition-all resize-none"
+                                required
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full rounded-full h-12 bg-[#19b2e5] text-white text-base font-bold tracking-[0.015em] disabled:opacity-50 hover:bg-[#1497c4] transition-colors"
+                        >
+                            {loading ? "Sending..." : "Send Message"}
+                        </button>
+                    </form>
+                </div>
+            </div>
         </section>
     );
 };

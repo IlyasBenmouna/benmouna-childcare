@@ -3,9 +3,24 @@
 @tailwind utilities;
 
 /* Base styles - should not override Tailwind utilities */
-html, body, #root {
+html,
+body,
+#root {
   width: 100% !important;
   box-sizing: border-box !important;
+}
+
+/* Hide scrollbar but keep functionality */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari and Opera */
 }
 
 /* Custom component styles */

@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const Hero = () => {
     return (
         <div className="@container">
@@ -13,12 +15,12 @@ export const Hero = () => {
                         <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
                             Benmouna Childcare
                         </h1>
-                        <h2 className="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-                            Providing a safe and stimulating environment for your child's growth and development.
+                        <h2 className="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal max-w-2xl">
+                            Hi! I'm Badia Benmouna, a fully OFSTED-registered childminder with 23 years of experience. I provide care for children aged 6 months to 7 years in a loving and educational home environment.
                         </h2>
                     </div>
                     <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#19b2e5] text-[#0e181b] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]">
-                        <span className="truncate">Learn More</span>
+                        <span className="truncate">Contact Me</span>
                     </button>
                 </div>
             </div>
