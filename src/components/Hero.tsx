@@ -1,4 +1,3 @@
-import React from 'react';
 
 export const Hero = () => {
     const scrollToContact = () => {
@@ -40,7 +39,7 @@ export const Hero = () => {
                 {/* Hero Content */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
                     <h1 className="text-white text-4xl md:text-5xl font-bold leading-tight tracking-[-0.015em] mb-4">
-                        Nurturing Young Minds in Upney
+                        Barking and Dagenham Childcare
                     </h1>
                     <p className="text-white/90 text-lg md:text-xl font-medium leading-relaxed mb-8 max-w-2xl">
                         Hi! I'm Badia Benmouna, a fully OFSTED-registered childminder with 23 years of experience. I provide care for children aged 6 months to 7 years in a loving and educational home environment.

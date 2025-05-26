@@ -31,9 +31,33 @@ const ImageModal: React.FC<ImageModalProps> = ({ src, alt, onClose }) => {
 
 export const NurseryGallery = () => {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
-    const [isHoveringLeft, setIsHoveringLeft] = useState(false);
-    const [isHoveringRight, setIsHoveringRight] = useState(false);
+    const [isHovering, setIsHovering] = useState(false);
+    const [mouseX, setMouseX] = useState(0);
+    const [containerWidth, setContainerWidth] = useState(0);
+    const scrollSpeed = 2; // Pixels per frame
+    const scrollThreshold = 0.2; // Percentage of container width for scroll zones
     const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const scrollAmount = 300; // Amount to scroll on button click
+
+    const handleScroll = (direction: 'left' | 'right') => {
+        const container = scrollContainerRef.current;
+        if (!container) return;
+
+        const scrollWidth = container.scrollWidth;
+        const clientWidth = container.clientWidth;
+        const currentScroll = container.scrollLeft;
+        const maxScroll = scrollWidth - clientWidth;
+
+        let targetScroll = currentScroll + (direction === 'left' ? -scrollAmount : scrollAmount);
+
+        // Ensure we don't scroll beyond bounds
+        targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
+
+        container.scrollTo({
+            left: targetScroll,
+            behavior: 'smooth'
+        });
+    };
 
     const galleryImages = [
         {
@@ -79,24 +103,57 @@ export const NurseryGallery = () => {
     ];
 
     useEffect(() => {
-        let scrollInterval: number;
+        let animationFrameId: number;
+        const container = scrollContainerRef.current;
 
-        if (isHoveringLeft) {
-            scrollInterval = window.setInterval(() => {
-                if (scrollContainerRef.current) {
-                    scrollContainerRef.current.scrollLeft -= 5;
-                }
-            }, 16);
-        } else if (isHoveringRight) {
-            scrollInterval = window.setInterval(() => {
-                if (scrollContainerRef.current) {
-                    scrollContainerRef.current.scrollLeft += 5;
-                }
-            }, 16);
+        if (container) {
+            setContainerWidth(container.offsetWidth);
         }
 
-        return () => window.clearInterval(scrollInterval);
-    }, [isHoveringLeft, isHoveringRight]);
+        const scroll = () => {
+            if (isHovering && container) {
+                const mousePosition = mouseX / containerWidth;
+
+                // Left scroll zone
+                if (mousePosition < scrollThreshold) {
+                    const scrollFactor = 1 - (mousePosition / scrollThreshold);
+                    container.scrollLeft -= scrollSpeed * scrollFactor;
+                }
+                // Right scroll zone
+                else if (mousePosition > (1 - scrollThreshold)) {
+                    const scrollFactor = (mousePosition - (1 - scrollThreshold)) / scrollThreshold;
+                    container.scrollLeft += scrollSpeed * scrollFactor;
+                }
+
+                animationFrameId = requestAnimationFrame(scroll);
+            }
+        };
+
+        if (isHovering) {
+            animationFrameId = requestAnimationFrame(scroll);
+        }
+
+        return () => {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+        };
+    }, [isHovering, mouseX, containerWidth]);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (scrollContainerRef.current) {
+            const rect = scrollContainerRef.current.getBoundingClientRect();
+            setMouseX(e.clientX - rect.left);
+        }
+    };
+
+    const handleMouseEnter = () => {
+        setIsHovering(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovering(false);
+    };
 
     return (
         <section className="px-4 py-12 bg-[#f8fafc]">
@@ -107,12 +164,16 @@ export const NurseryGallery = () => {
                 <div className="relative bg-white rounded-2xl shadow-lg p-6">
                     {/* Left Navigation Area */}
                     <div
-                        className="absolute left-0 top-0 bottom-0 w-24 z-10 flex items-center justify-start pl-4 opacity-0 hover:opacity-100 transition-opacity"
-                        onMouseEnter={() => setIsHoveringLeft(true)}
-                        onMouseLeave={() => setIsHoveringLeft(false)}
+                        className="absolute left-0 top-0 bottom-0 w-24 z-10 flex items-center justify-start pl-4 group"
+                        onMouseEnter={() => setIsHovering(true)}
+                        onMouseLeave={() => setIsHovering(false)}
                     >
                         <button
-                            className="p-2 rounded-full bg-white shadow-lg text-[#0e181b] hover:bg-[#f0f5f7] transition-colors"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                handleScroll('left');
+                            }}
+                            className="p-2 rounded-full bg-white shadow-lg text-[#0e181b] hover:bg-[#f0f5f7] transition-colors opacity-0 group-hover:opacity-100"
                             aria-label="Scroll left"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
@@ -123,12 +184,16 @@ export const NurseryGallery = () => {
 
                     {/* Right Navigation Area */}
                     <div
-                        className="absolute right-0 top-0 bottom-0 w-24 z-10 flex items-center justify-end pr-4 opacity-0 hover:opacity-100 transition-opacity"
-                        onMouseEnter={() => setIsHoveringRight(true)}
-                        onMouseLeave={() => setIsHoveringRight(false)}
+                        className="absolute right-0 top-0 bottom-0 w-24 z-10 flex items-center justify-end pr-4 group"
+                        onMouseEnter={() => setIsHovering(true)}
+                        onMouseLeave={() => setIsHovering(false)}
                     >
                         <button
-                            className="p-2 rounded-full bg-white shadow-lg text-[#0e181b] hover:bg-[#f0f5f7] transition-colors"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                handleScroll('right');
+                            }}
+                            className="p-2 rounded-full bg-white shadow-lg text-[#0e181b] hover:bg-[#f0f5f7] transition-colors opacity-0 group-hover:opacity-100"
                             aria-label="Scroll right"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
@@ -140,7 +205,10 @@ export const NurseryGallery = () => {
                     {/* Scroll Container */}
                     <div
                         ref={scrollContainerRef}
-                        className="overflow-x-auto hide-scrollbar"
+                        className="overflow-x-auto hide-scrollbar scroll-smooth"
+                        onMouseMove={handleMouseMove}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
                     >
                         <div className="flex gap-6 pb-4">
                             {galleryImages.map((item, index) => (
