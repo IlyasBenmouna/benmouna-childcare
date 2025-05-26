@@ -37,24 +37,44 @@ export const NurseryGallery = () => {
 
     const galleryImages = [
         {
-            title: "Playroom",
-            desc: "A vibrant and engaging playroom filled with toys and activities.",
+            title: "Playroom Area",
+            desc: "A bright and welcoming space for children to play and learn.",
             img: "/gallery/playroom1.jpg"
         },
         {
-            title: "Outdoor Area",
-            desc: "Safe and fun outdoor space for children to explore and play.",
+            title: "Outdoor Activities",
+            desc: "Safe outdoor space for physical activities.",
             img: "/gallery/outdoor1.jpg"
         },
         {
             title: "Learning Space",
-            desc: "Dedicated area for learning and educational activities.",
+            desc: "Engaging educational activities for all ages.",
             img: "/gallery/learning1.jpg"
         },
         {
             title: "Reading Corner",
-            desc: "Cozy corner for storytelling and quiet activities.",
+            desc: "Cozy space for storytelling and quiet activities.",
             img: "/gallery/reading1.jpg"
+        },
+        {
+            title: "Play Area 1",
+            desc: "Fun and educational play space for children.",
+            img: "/gallery/image5.jpg"
+        },
+        {
+            title: "Play Area 2",
+            desc: "Interactive learning through play.",
+            img: "/gallery/image6.jpg"
+        },
+        {
+            title: "Play Area 3",
+            desc: "Safe and engaging environment for children.",
+            img: "/gallery/image7.jpg"
+        },
+        {
+            title: "Play Area 4",
+            desc: "Our main activity area for children.",
+            img: "/gallery/image8.jpg"
         }
     ];
 
