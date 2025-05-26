@@ -37,7 +37,7 @@ export const NurseryGallery = () => {
     const scrollSpeed = 2; // Pixels per frame
     const scrollThreshold = 0.2; // Percentage of container width for scroll zones
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const scrollAmount = 300; // Amount to scroll on button click
+    const scrollAmount = 286; // Card width (280px) + gap (6px)
 
     const handleScroll = (direction: 'left' | 'right') => {
         const container = scrollContainerRef.current;
@@ -162,45 +162,26 @@ export const NurseryGallery = () => {
 
                 {/* Carousel Container with Navigation Areas */}
                 <div className="relative bg-white rounded-2xl shadow-lg p-6">
-                    {/* Left Navigation Area */}
-                    <div
-                        className="absolute left-0 top-0 bottom-0 w-24 z-10 flex items-center justify-start pl-4 group"
-                        onMouseEnter={() => setIsHovering(true)}
-                        onMouseLeave={() => setIsHovering(false)}
+                    {/* Navigation Buttons */}
+                    <button
+                        onClick={() => handleScroll('left')}
+                        className="absolute left-2 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white shadow-lg text-[#0e181b] hover:bg-[#f0f5f7] transition-colors"
+                        aria-label="Scroll left"
                     >
-                        <button
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                handleScroll('left');
-                            }}
-                            className="p-2 rounded-full bg-white shadow-lg text-[#0e181b] hover:bg-[#f0f5f7] transition-colors opacity-0 group-hover:opacity-100"
-                            aria-label="Scroll left"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
-                                <path d="M168.49,199.51a12,12,0,0,1-17,17l-80-80a12,12,0,0,1,0-17l80-80a12,12,0,0,1,17,17L97,128Z" />
-                            </svg>
-                        </button>
-                    </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M168.49,199.51a12,12,0,0,1-17,17l-80-80a12,12,0,0,1,0-17l80-80a12,12,0,0,1,17,17L97,128Z" />
+                        </svg>
+                    </button>
 
-                    {/* Right Navigation Area */}
-                    <div
-                        className="absolute right-0 top-0 bottom-0 w-24 z-10 flex items-center justify-end pr-4 group"
-                        onMouseEnter={() => setIsHovering(true)}
-                        onMouseLeave={() => setIsHovering(false)}
+                    <button
+                        onClick={() => handleScroll('right')}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white shadow-lg text-[#0e181b] hover:bg-[#f0f5f7] transition-colors"
+                        aria-label="Scroll right"
                     >
-                        <button
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                handleScroll('right');
-                            }}
-                            className="p-2 rounded-full bg-white shadow-lg text-[#0e181b] hover:bg-[#f0f5f7] transition-colors opacity-0 group-hover:opacity-100"
-                            aria-label="Scroll right"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
-                                <path d="M184.49,136.49l-80,80a12,12,0,0,1-17-17L159,128,87.51,56.49a12,12,0,0,1,17-17l80,80A12,12,0,0,1,184.49,136.49Z" />
-                            </svg>
-                        </button>
-                    </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M184.49,136.49l-80,80a12,12,0,0,1-17-17L159,128,87.51,56.49a12,12,0,0,1,17-17l80,80A12,12,0,0,1,184.49,136.49Z" />
+                        </svg>
+                    </button>
 
                     {/* Scroll Container */}
                     <div
