@@ -58,6 +58,18 @@ export const HeroSection = () => {
                         <p className="text-[#4e8597] text-sm font-normal leading-normal">Structured activities & play</p>
                     </div>
                 </div>
+                {/* Care for Babies */}
+                <div className="flex flex-1 gap-3 rounded-lg border border-[#d0e1e7] p-4 flex-col">
+                    <div className="text-[#0e181b]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M224,104h-8V88a8,8,0,0,0-16,0v16H168V88a8,8,0,0,0-16,0v16H120V88a8,8,0,0,0-16,0v16H72V88a8,8,0,0,0-16,0v16H48V88a8,8,0,0,0-16,0v16H24A16,16,0,0,0,8,120v48a16,16,0,0,0,16,16h8v16a8,8,0,0,0,16,0V184H80v16a8,8,0,0,0,16,0V184h32v16a8,8,0,0,0,16,0V184h32v16a8,8,0,0,0,16,0V184h8a16,16,0,0,0,16-16V120A16,16,0,0,0,224,104Zm0,64H24V120H224Z" />
+                        </svg>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                        <h2 className="text-[#0e181b] text-base font-bold leading-tight">Care for Babies</h2>
+                        <p className="text-[#4e8597] text-sm font-normal leading-normal">6 months+ and young children</p>
+                    </div>
+                </div>
             </div>
         </>
     );

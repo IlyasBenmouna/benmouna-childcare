@@ -1,4 +1,3 @@
-import React from 'react';
 
 export const AboutMe = () => (
     <section className="px-4 py-12 border-b border-[#e7f0f3]">
@@ -16,8 +15,8 @@ export const AboutMe = () => (
                     <h2 className="text-[#0e181b] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-2">Badia Benmouna</h2>
                     <p className="text-[#4e8597] text-base font-normal leading-normal mb-4">OFSTED-Registered Childminder</p>
                     <p className="text-[#4e8597] text-base font-normal leading-normal">
-                        My philosophy is to create a nurturing space where children feel secure, happy, and inspired to learn through play.
-                        I work closely with parents to ensure each child's needs are met with care and attention.
+                        MHi! My name is Badia Benmouna, and I’m a fully OFSTED-registered childminder with 23 years of experience. I provide care for children aged 6 months to 7 years in a loving and educational home environment.
+                        My philosophy is to create a nurturing space where children feel secure, happy, and inspired to learn through play. I work closely with parents to ensure each child's needs are met with care and attention.
                     </p>
                 </div>
             </div>
