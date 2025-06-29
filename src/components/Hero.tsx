@@ -20,13 +20,13 @@ export const Hero = () => {
                 />
 
                 {/* Ofsted Badge Overlay */}
-                <div className="absolute top-4 right-4 md:top-6 md:right-6">
+                <div className="absolute hidden md:!block top-4 right-4 md:top-6 md:right-6">
                     <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg">
                         <div className="flex items-center gap-3 p-3">
                             <img
                                 src="/ofsted-good.png"
                                 alt="Ofsted Good Provider Badge"
-                                className="h-16 w-auto"
+                                className={`h-16 w-auto`}
                             />
                             <div className="text-left">
                                 <p className="text-[#0e181b] text-sm font-medium">Ofsted Registered</p>
