@@ -8,7 +8,7 @@ export const Hero = () => {
     };
 
     return (
-        <div className="relative">
+        <div id="hero-section" className="relative">
             {/* Hero Image */}
             <div className="relative h-[480px] md:h-[640px] overflow-hidden">
                 <div

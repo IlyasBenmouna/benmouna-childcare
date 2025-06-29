@@ -1,4 +1,8 @@
+import { useSmoothScroll } from '../hooks/useSmoothScroll';
+
 export const Header = () => {
+    const { scrollToSection, handleNavClick } = useSmoothScroll();
+
     return (
         <header className="flex items-center justify-between border-b border-solid border-b-[#e7f0f3] px-4 py-3 md:px-10">
             <div className="flex items-center gap-4 text-[#0e181b] mx-auto md:mx-0">
@@ -14,11 +18,12 @@ export const Header = () => {
             {/* Hide this part on small screens */}
             <div className="hidden md:flex flex-1 justify-end gap-8">
                 <div className="flex items-center gap-9">
-                    <a className="text-[#0e181b] text-sm font-medium leading-normal" href="#">Home</a>
-                    <a className="text-[#0e181b] text-sm font-medium leading-normal" href="#">Services</a>
-                    <a className="text-[#0e181b] text-sm font-medium leading-normal" href="#">About</a>
+                    <a className="text-[#0e181b] text-sm font-medium leading-normal" href="#hero-section" onClick={handleNavClick}>Home</a>
+                    <a className="text-[#0e181b] text-sm font-medium leading-normal" href="#services-section" onClick={handleNavClick}>Services</a>
+                    <a className="text-[#0e181b] text-sm font-medium leading-normal" href="#about-me-section" onClick={handleNavClick}>About</a>
                 </div>
                 <button
+                    onClick={() => scrollToSection('contact-section')}
                     className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#19b2e5] text-[#0e181b] text-sm font-bold leading-normal tracking-[0.015em]"
                 >
                     <span className="truncate">Contact Me</span>

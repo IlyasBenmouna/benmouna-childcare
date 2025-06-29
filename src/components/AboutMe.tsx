@@ -1,6 +1,6 @@
 
 export const AboutMe = () => (
-    <section className="px-4 py-12 border-b border-[#e7f0f3]">
+    <section id="about-me-section" className="px-4 py-12 border-b border-[#e7f0f3]">
         <div className="flex flex-col md:flex-row gap-8 md:gap-12 max-w-6xl mx-auto">
             {/* Left Column - Profile */}
             <div className="flex flex-col md:flex-row gap-6 flex-1">

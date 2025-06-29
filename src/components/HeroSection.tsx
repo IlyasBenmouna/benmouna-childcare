@@ -1,6 +1,7 @@
 export const HeroSection = () => {
     return (
         <>
+        <section id = "services-section">
             <h2 className="text-[#0e181b] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pt-5">
                 Our Services
             </h2>
@@ -69,6 +70,7 @@ export const HeroSection = () => {
                     </div>
                 </div>
             </div>
+        </section>
         </>
     );
 };
